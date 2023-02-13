@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row flex-nowrap">
+						<div class="modal-content">
+								<div class="story-modal">
+								<th:block class="main-card" th:each="story, status: ${storys}">
+									<input type="hidden" id="storyId" th:value="${story.id}">
+									<div class="story-modal-left">
+										<div class="modal-img-youtube">
+										<img alt="스토리 상세 이미지" th:src="${story.media.imgUrl}" class="story-dtl-img">
+										
+											<iframe class="modal-youtube"
+												th:src="${story.youtubeLink}"
+												title="YouTube video player" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+												allowfullscreen></iframe>
+										</div>
+									</div>
+									<div class="story-right">
+										<div class="story-writing">
+											<ul class="modal-user-story-1" style="padding-left: 5px;">
+												<li class="modal-profile-img"><img alt="카드 프로필 이미지"
+													src="/images/usericon.png" style="width: 50px"></li>
+												<li class="modal-user-name">[[${story.member.nickname}]]</li>
+												<li class="modal-user-id">[[${story.member.email}]]</li>
+											</ul>
+											<ul class="modal-user-story-2" style="padding-left: 5px;">
+												<li class="modal-story-gemetag"><img alt="gametag"
+													src="/images/gamepad.png" style="width: 20px"><span th:text="${story.gameTag}"></span></li>
+												<li class="modal-story-writing">[[${story.content}]]</li>
+											</ul>
+											<ul class="modal-user-story-3" style="padding-left: 5px">
+												<li class="modal-like"><img class="modal-like-img"
+													alt="좋아요 아이콘" src="/images/like.png" style="width: 30px"
+													height="30px">
+													<div class="like-count-modal">39</div></li>
+												<li class="modal-comment"><img
+													class="modal-comment-img" alt="댓글 아이콘"
+													src="/images/comment.png" style="width: 37px" height="37px">
+													<div class="comment-count-modal">1</div></li>
+											</ul>
+											<ul class="modal-user-story-4" style="padding-left: 5px">
+												<li class="modal-comment-li"><input type="text"
+													class="modal-comment" placeholder="당신의 따뜻한 말 한마디가 필요합니다."></li>
+												<li class="modal-comment-btn-li">
+													<button type="submit" class="modal-comment-btn"
+														style="padding: 0px">
+														<img class="send-img" alt="보내기 버튼" src="/images/send.png">
+													</button>
+												</li>
+											</ul>
+										</div>
+									</div>
+									</th:block>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+</body>
+</html>

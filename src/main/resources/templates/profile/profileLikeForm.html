@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+	function onClickUpload() {
+		let myInput = document.getElementById("my-input");
+		myInput.click();
+	}
+</script>
+
+
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row flex-nowrap">
+				<main class="col-9 py-md-3 pl-md-5 bd-content" role="main">
+					<div class="profile-info">
+						<!-- Button trigger modal -->
+						<button type="button" class="profile-update"
+							data-bs-toggle="modal" data-bs-target="#user-id">프로필 편집</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="user-id" data-bs-backdrop="static"
+							data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5 profile-update-title"
+											id="staticBackdropLabel" style="padding-left: 190px;">프로필 편집</h1>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="profile-update1">
+											<button class="profile-img-del">사진 삭제</button>
+											<div class="profile-img-w">프로필 사진</div>
+											<div class="profile-img">
+												<img alt="프로필 사진" src="/images/usericon.png"
+													class="profile-now" style="width: 100px;">
+											</div>
+										</div>
+										<div class="profile-update2">
+											<div class="profile-nickname-update">
+												<div class="profile-nickname-title">닉네임 수정</div>
+												<input type="text" placeholder="테스트 계정1" class="profile-user-nickname">
+											</div>
+											<div class="profile-aboutme-update">
+												<div class="profile-aboutme-title">자기소개</div>
+												<input type="text" placeholder="간단한 한줄로 나를 소개해보세요" class="profile-user-aboutme">
+											</div>
+										</div>
+										
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="profile-save-btn">저장</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="profile-main1">
+						<ul class="profileform-profile-info">
+							<li class="profileform-profile-img"><img alt="프로필 사진"
+								src="/images/usericon.png" style="width: 150px;"></li>
+							<li class="profileform-nickname">테스트 계정</li>
+							<li class="profileform-userid">abc1234</li>
+						</ul>						
+						</div>
+						<div class="profile-main2">
+							<ul class="count">
+								<li class="count-li">
+								<div class="following-count">5</div>
+								<div class="count-name1">팔로잉</div>
+								</li>
+								<li class="count-li">
+								<div class="follower-count">0</div>
+								<div class="count-name2">팔로워</div>								
+								</li>
+								<li class="count-li">
+								<div class="story-count">1</div>
+								<div class="count-name3">스토리</div>								
+								</li>
+							</ul>
+							<ul class="select-profile" style="padding-left: 0px;">
+							<li class="profile-story"><h6 class="profile-h6" onclick="location.href='/profile/profileForm'">스토리</h6></li>
+							<li class="profile-like" style="background-color: #ECECEC"><h6 class="profile-h6">좋아요</h6></li>
+							</ul>
+						</div>
+						<div class="profile-main3">
+							<div class="profile-story-list">
+								<div class="profile-story-card">								
+										<!-- Button trigger modal -->
+													<button type="button" class="btn-story-big"
+														data-bs-toggle="modal" data-bs-target="#11"
+														style="padding: 0px;">
+														<img class="plofile-story-img" alt="프로필스토리사진"
+															src="/images/티모.png" style="width: 220px" height="220px">
+													</button> <!-- Modal -->
+													<div class="modal fade" id="11" tabindex="-1"
+														aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-fullscreen">
+															<div class="modal-content">
+																<button type="button" class="btn-close"
+																	data-bs-dismiss="modal" aria-label="Close"
+																	style="margin-left: 0px;"></button>
+																<div class="modal-body" style="padding: 0px;">
+																	<div class="story-modal">
+																		<div class="story-modal-left">
+																			<div class="modal-img-youtube">
+																				<img class="modal-img" alt="예시" src="/images/티모.png">
+																			</div>
+																		</div>
+																		<div class="story-modal-right">
+																			<div class="story-modal-writing">
+																				<ul class="modal-user-story-1"
+																					style="padding-left: 5px;">
+																					<li class="modal-profile-img"><img
+																						alt="카드 프로필 이미지" src="/images/usericon.png"
+																						style="width: 50px"></li>
+																					<li class="modal-user-name">김김김</li>
+																					<li class="modal-user-id">abc111</li>
+																				</ul>
+																				<ul class="modal-user-story-2"
+																					style="padding-left: 5px;">
+																					<li class="modal-story-gemetag"><img
+																						alt="gametag" src="/images/gamepad.png"
+																						style="width: 20px"> league of legends</li>
+																					<li class="modal-story-writing">스토리 내용입니다.</li>
+																				</ul>
+																				<ul class="modal-user-story-3"
+																					style="padding-left: 5px">
+																					<li class="modal-like"><img
+																						class="modal-like-img" alt="좋아요 아이콘"
+																						src="/images/like.png" style="width: 30px"
+																						height="30px">
+																						<div class="like-count-modal">39</div></li>
+																					<li class="modal-comment"><img
+																						class="modal-comment-img" alt="댓글 아이콘"
+																						src="/images/comment.png" style="width: 37px"
+																						height="37px">
+																						<div class="comment-count-modal">1</div></li>
+																				</ul>
+																				<ul class="modal-user-story-4"
+																					style="padding-left: 5px">
+																					<li class="modal-comment-li"><input
+																						type="text" class="modal-comment"
+																						placeholder="당신의 따뜻한 말 한마디가 필요합니다."></li>
+																					<li class="modal-comment-btn-li">
+																						<button type="submit" class="modal-comment-btn"
+																							style="padding: 0px">
+																							<img class="send-img" alt="보내기 버튼"
+																								src="/images/send.png">
+																						</button>
+																					</li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>							
+								<div class="profile-story-writing">테스트 게시판입니다</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</main>
+				<div class="col-3 bd-sidebar">
+					<ul class="nav">
+						<li><a class="side-menu" id="story" href="/"> <img alt="스토리이미지"
+								src="/images/home.png" width="40px" class="side-img">
+								<div class="side-font">스토리</div></a></li>
+						<li><a class="side-menu" id="profile"
+							style="background-color: #ECECEC" href="/profile/profileForm"> <img alt="프로필이미지"
+								src="/images/profile.png" width="40px" class="side-img">
+								<div class="side-font">프로필</div></a></li>
+						<li><a class="side-menu" id="follow"> <img alt="팔로우이미지"
+								src="/images/follow.png" width="40px" class="side-img">
+								<div class="side-font">팔로우</div></a></li>
+					</ul>
+					<div class="side-menu2">
+						<div class="side-menu2-font">추천계정</div>
+					</div>
+
+					<footer> 김명현 개인 프로젝트 https://github.com/myeonghyeonKim0922
+					</footer>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

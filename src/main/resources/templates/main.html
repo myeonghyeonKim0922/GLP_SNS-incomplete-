@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{layouts/layout1}">
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+ <th:block layout:fragment="script">
+	<script th:inline="javascript">
+  		$(document).ready(function(){
+        	var errorMessage = [[${loginErrorMsg}]];
+        	if(errorMessage != null){
+            	alert(errorMessage);
+        	}
+    	});  
+	    
+		function onClickUpload() {
+			let myInput = document.getElementsByClassName("my-input");
+			myInput.click();
+		}
+	</script>
+</th:block>  
+
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row flex-nowrap">
+				<main class="col-9 py-md-3 pl-md-5 bd-content" role="main">
+					<div class="main-write" style="border-bottom: 1px solid #C6BABA;">
+						<img alt="프로필 이미지" src="/images/usericon.png"
+							class="main-write-img" width="50px">
+						<button type="button" class="writing-btn" onclick="location.href='/story/create'">당신의 게임 이야기를 들려주세요</button>
+					</div>
+					<div class="main">
+						<th:block class="main-card" th:each="story, status: ${storys}">
+							<div class="card-info">
+								<div class="story-menu">
+									<div class="dropdown">
+										<button class="btn btn-secondary dropdown-toggle"
+											type="button" data-bs-toggle="dropdown" aria-expanded="false">
+											<img alt="dropmenu" src="/images/dotmenu.png" style="width: 30px;"> </button>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" th:href="@{/story/delete(storyId=${story.id})}">게시글 삭제</a></li>
+											<li><a class="dropdown-item" th:href="'/story/create/'+${story.id}">게시글 수정</a></li>
+											<li><a class="dropdown-item" href="#">유저 차단</a></li>
+										</ul>
+									</div>
+								</div>
+					 			<ul class="user-info-ul" style="margin-bottom: 8px;">
+									<li class="card-profile-img"><img alt="카드 프로필 이미지"
+										src="/images/usericon.png" style="width: 50px"></li>
+									<li class="user-name">[[${story.member.nickname}]]</li>
+									<li class="user-id">[[${story.member.email}]]</li>
+								</ul>
+								<ul class="story-info-ul" style="margin-bottom: 0px;">
+									<li class="story-gemetag"><img alt="gametag"
+										src="/images/gamepad.png" style="width: 20px">[[${story.gameTag}]]</li>
+									<li class="story-writing">[[${story.content}]]</li>
+									<li>
+										<div class="story-media">
+										<img class="story-img" alt="이미지" th:src="${story.media.imgUrl}">
+											<iframe class="youtube" 
+												th:src="${story.youtubeLink}"
+												title="YouTube video player" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+												allowfullscreen ></iframe>
+										</div>
+									</li>
+									<li>
+										<div class="like-comment">
+											<ul class="like-comment-ul">
+												<li class="like"><img class="like-img" alt="좋아요 아이콘"
+													src="/images/like.png" style="width: 30px">39</li>
+												<li class="comment">	
+												<a th:href="'/story/dtl/'+${story.id}" class="storyDtla">												
+														<img class="comment-img" alt="댓글 아이콘"
+															src="/images/comment.png" style="width: 37px">
+													<div class="comment-count-main">1</div>
+												</a>
+
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="writing-date">12시간 전</li>
+								</ul> 
+							</div>
+						</th:block>
+					</div>
+				</main>
+				
+				<div class="col-3 bd-sidebar">
+					<ul class="nav">
+						<li><a class="side-menu" id="story"
+							style="background-color: #ECECEC" href="/"> <img alt="스토리이미지"
+								src="/images/home.png" width="40px" class="side-img">
+								<div class="side-font">스토리</div></a></li>
+						<li><a class="side-menu" id="profile" href="/profile/my"> <img alt="프로필이미지"
+								src="/images/profile.png" width="40px" class="side-img">
+								<div class="side-font">프로필</div></a></li>
+						<li><a class="side-menu" id="follow"> <img alt="팔로우이미지"
+								src="/images/follow.png" width="40px" class="side-img">
+								<div class="side-font">팔로우</div></a></li>
+					</ul>
+					<div class="side-menu2">
+						<div class="side-menu2-font">추천계정</div>
+					</div>
+
+					<footer> 김명현 개인 프로젝트 https://github.com/myeonghyeonKim0922
+					</footer>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

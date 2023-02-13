@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+	    //회원가입이 실패했을때
+		$(document).ready(function(){
+        	var errorMessage = [[${loginErrorMsg}]];
+        	if(errorMessage != null){
+            	alert(errorMessage);
+        	}
+    	});
+	</script>
+</th:block>
+<th:block layout:fragment="css">
+	<style>
+.fieldError {
+	color: #bd2130;
+}
+</style>
+</th:block>
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row flex-nowrap">
+				<form class="row g-3" role="form" action="/members/new"
+					method="post" th:object="${memberFormDto}">
+					<div class="signup-content">
+						<div class="modal-body">
+							<div class="signup-page-email">
+								<label th:for="email" class="login-page-h6">이메일</label> <input
+									type="email" th:field="*{email}" class="signup-page-email">
+								<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+									class="fieldError">Incorrect Data</p>
+							</div>
+
+							<div class="signup-page-password">
+								<label th:for="password" class="login-page-h6">비밀번호</label> <input
+									type="password" th:field="*{password}" placeholder="비밀번호를 입력"
+									class="signup-page-password">
+								<p th:if="${#fields.hasErrors('password')}"
+									th:errors="*{password}" class="fieldError">Incorrect Data</p>
+							</div>
+
+							<div class="signup-page-nickname">
+								<label th:for="nickname" class="login-page-h6">닉네임</label> <input
+									th:field="*{nickname}" type="text" class="signup-page-password">
+								<p th:if="${#fields.hasErrors('nickname')}"
+									th:errors="*{nickname}" class="fieldError">Incorrect Data</p>
+
+							</div>
+						</div>
+						<div class="signup-footer">
+							<button class="signup-submit" type="submit">등록하기</button>
+						</div>
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
