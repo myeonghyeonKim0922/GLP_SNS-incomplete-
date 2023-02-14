@@ -8,9 +8,9 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="container-fluid">
+		<div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
 			<div class="row flex-nowrap">
-						<div class="modal-content">
+						<div class="modal-content" style="padding-left: 0px; padding-right: 0px;">
 								<div class="story-modal">
 								<th:block class="main-card" th:each="story, status: ${storys}">
 									<input type="hidden" id="storyId" th:value="${story.id}">
@@ -26,8 +26,19 @@
 										</div>
 									</div>
 									<div class="story-right">
-										<div class="story-writing">
+										<div class="story-right-content">
+										<div class="dropdown">
+										<button class="story-menu"
+											type="button" data-bs-toggle="dropdown" aria-expanded="false">
+											<img alt="dropmenu" src="/images/dotmenu.png" style="width: 30px;"> </button>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" th:href="@{/story/delete(storyId=${story.id})}">게시글 삭제</a></li>
+											<li><a class="dropdown-item" th:href="'/story/create/'+${story.id}">게시글 수정</a></li>
+											<li><a class="dropdown-item" href="#">유저 차단</a></li>
+										</ul>
+									</div>
 											<ul class="modal-user-story-1" style="padding-left: 5px;">
+											
 												<li class="modal-profile-img"><img alt="카드 프로필 이미지"
 													src="/images/usericon.png" style="width: 50px"></li>
 												<li class="modal-user-name">[[${story.member.nickname}]]</li>

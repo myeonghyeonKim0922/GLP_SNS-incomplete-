@@ -8,51 +8,41 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="modal fade" id="user-id" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<form role="form" method="post" action="/profile/update"
-				enctype="multipart/form-data" th:object="${profileFormDto}">
-				<input type="hidden" name="memberId" id="memberId"
-					value="${member.id}" />
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5 profile-update-title"
-							id="staticBackdropLabel" style="padding-left: 190px;">프로필 편집</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="profile-update1">
-							<input id="my-input" type="file" />
-							<div class="profile-img-w">프로필 사진</div>
-							<div class="profile-img">
-								<input id="my-input" type="file"> <img
-									src="/image/${media.imgUrl}"
-									style="max-width: 25px; height: 25px;">
-							</div>
-						</div>
-						<div class="profile-update2">
-							<div class="profile-nickname-update">
-								<div class="profile-nickname-title">닉네임 수정</div>
-								<input type="text" placeholder="테스트 계정1" th:field="*{nickname}"
-									class="profile-user-nickname">
-							</div>
-							<div class="profile-aboutme-update">
-								<div class="profile-aboutme-title">자기소개</div>
-								<input type="text" placeholder="간단한 한줄로 나를 소개해보세요"
-									th:field="*{introWriting}" class="profile-user-aboutme">
-							</div>
-						</div>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row flex-nowrap">
+						<form class="row g-3" role="form" method="post" 
+							enctype="multipart/form-data" th:object="${profileFormDto}">
+							<input type="hidden" name="memberId" id="memberId"
+								value="${member.id}" />
+								<div class="modal-header">
+									<h1 class="modal-title fs-5 profile-update-title"
+										id="staticBackdropLabel" style="padding-left: 190px;">프로필
+										편집</h1>
+								</div>
+								<div class="modal-body">
+									</div>
+									<div class="profile-update2">
+										<div class="profile-nickname-update">
+											<div class="profile-nickname-title">닉네임 수정</div>
+											<input type="text"
+												th:field="*{nickname}" class="profile-user-nickname">
+										</div>
+										<div class="profile-aboutme-update">
+											<div class="profile-aboutme-title">자기소개</div>
+											<input type="text" placeholder="간단한 한줄로 나를 소개해보세요"
+												th:field="*{introWriting}" class="profile-user-aboutme">
+										</div>
+									</div>
 
+								<div class="profile-save-btn">
+									<button type="submit" class="save-btn">저장</button>
+								</div>
+								<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}">
+						</form>
 					</div>
-					<div class="modal-footer">
-						<button type="submit" class="profile-save-btn">저장</button>
-					</div>
-				</div>
-			</form>
+			</div>
 		</div>
-	</div>
 </body>
 </html>

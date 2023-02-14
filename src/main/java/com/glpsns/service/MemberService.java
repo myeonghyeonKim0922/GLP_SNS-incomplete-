@@ -13,9 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.glpsns.repository.MediaRepository;
 import com.glpsns.repository.MemberRepository;
+import com.glpsns.repository.StoryRepository;
 import com.glpsns.dto.ProfileFormDto;
+import com.glpsns.entity.Media;
 import com.glpsns.entity.Member;
+import com.glpsns.entity.Story;
+
 import lombok.RequiredArgsConstructor;
 
 @Service //service 클래스의 역할
@@ -24,6 +29,9 @@ import lombok.RequiredArgsConstructor;
 public class MemberService implements UserDetailsService { //UserDetailsService: 로그인시 request에서 넘어온 사용자 정보를 받음
 	private final MemberRepository memberRepository; //의존성 주입
 	
+	private final StoryRepository storyrepository;
+
+	private final MediaRepository mediaRepository;
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Member member = memberRepository.findByEmail(email); 
@@ -57,19 +65,20 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 	
 	@Transactional(readOnly = true) //트랜잭션 읽기 전용(변경감지 수행하지 않음) -> 성능향상
 	public ProfileFormDto getProfile(String email) { 
-		//2.item테이블에 있는 데이터를 가져온다.
+		List<Media> medias = new ArrayList<>();
 		Member member = memberRepository.findByEmail(email);
-		
-		
-		//엔티티 객체 -> Dto객체로 변환
-		ProfileFormDto profileFormDto = ProfileFormDto.of(member);
-		
-		//상품의 이미지 정보를 넣어준다.
-		
+		List<Story> story = storyrepository.findByMemberId(member.getId());
+		ProfileFormDto profileFormDto = new ProfileFormDto(member);
+		for(Story storys : story) { 
+		Media media = mediaRepository.findByStoryId(storys.getId());
+		medias.add(media);	
+		}
+		profileFormDto.addStoryDto(story);
+		profileFormDto.addMediaDto(medias);
 		return profileFormDto;
 	}
 	
-	public Long updateItem(ProfileFormDto profileFormDto, List<MultipartFile> itemImgFileList) throws Exception {
+	public Long updateItem(ProfileFormDto profileFormDto) throws Exception {
 		Member member = memberRepository.findById(profileFormDto.getId())
 				.orElseThrow(EntityNotFoundException::new);
 		

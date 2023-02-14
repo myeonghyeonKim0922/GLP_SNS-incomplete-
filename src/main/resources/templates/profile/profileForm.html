@@ -33,16 +33,15 @@
 
 </head>
 <body>
+	<form th:object="${profileFormDto}" role="form" method="get">
 	<div layout:fragment="content">
 		<div class="container-fluid">
 			<div class="row flex-nowrap">
 				<main class="col-9 py-md-3 pl-md-5 bd-content" role="main">
 					<div class="profile-info">
 						<!-- Button trigger modal -->
-						<button type="button" class="profile-update"
-							data-bs-toggle="modal" data-bs-target="#user-id">프로필 편집</button>
+						<button type="button" class="profile-update" onclick="location.href='/profile/update'">프로필 편집</button>
 
-						<form th:object="${profileFormDto}" role="form" method="get">
 						<div class="profile-main1">
 						<ul class="profileform-profile-info">
 							<li class="profileform-profile-img"><img alt="프로필 사진"
@@ -73,83 +72,11 @@
 						</div>
 						<div class="profile-main3">
 							<div class="profile-story-list">
-								<div class="profile-story-card">								
-										<!-- Button trigger modal -->
-													<button type="button" class="btn-story-big"
-														data-bs-toggle="modal" data-bs-target="#11"
-														style="padding: 0px;">
-														<img class="plofile-story-img" alt="프로필스토리사진"
-															src="/images/티모.png" style="width: 220px" height="220px">
-													</button> <!-- Modal -->
-													<div class="modal fade" id="11" tabindex="-1"
-														aria-labelledby="exampleModalLabel" aria-hidden="true">
-														<div class="modal-dialog modal-fullscreen">
-															<div class="modal-content">
-																<button type="button" class="btn-close"
-																	data-bs-dismiss="modal" aria-label="Close"
-																	style="margin-left: 0px;"></button>
-																<div class="modal-body" style="padding: 0px;">
-																	<div class="story-modal">
-																		<div class="story-modal-left">
-																			<div class="modal-img-youtube">
-																				<img class="modal-img" alt="예시" src="/images/티모.png">
-																			</div>
-																		</div>
-																		<div class="story-modal-right">
-																			<div class="story-modal-writing">
-																				<ul class="modal-user-story-1"
-																					style="padding-left: 5px;">
-																					<li class="modal-profile-img"><img
-																						alt="카드 프로필 이미지" src="/images/usericon.png"
-																						style="width: 50px"></li>
-																					<li class="modal-user-name">김김김</li>
-																					<li class="modal-user-id">abc111</li>
-																				</ul>
-																				<ul class="modal-user-story-2"
-																					style="padding-left: 5px;">
-																					<li class="modal-story-gemetag"><img
-																						alt="gametag" src="/images/gamepad.png"
-																						style="width: 20px"> league of legends</li>
-																					<li class="modal-story-writing">스토리 내용입니다.</li>
-																				</ul>
-																				<ul class="modal-user-story-3"
-																					style="padding-left: 5px">
-																					<li class="modal-like"><img
-																						class="modal-like-img" alt="좋아요 아이콘"
-																						src="/images/like.png" style="width: 30px"
-																						height="30px">
-																						<div class="like-count-modal">39</div></li>
-																					<li class="modal-comment"><img
-																						class="modal-comment-img" alt="댓글 아이콘"
-																						src="/images/comment.png" style="width: 37px"
-																						height="37px">
-																						<div class="comment-count-modal">1</div></li>
-																				</ul>
-																				<ul class="modal-user-story-4"
-																					style="padding-left: 5px">
-																					<li class="modal-comment-li"><input
-																						type="text" class="modal-comment"
-																						placeholder="당신의 따뜻한 말 한마디가 필요합니다."></li>
-																					<li class="modal-comment-btn-li">
-																						<button type="submit" class="modal-comment-btn"
-																							style="padding: 0px">
-																							<img class="send-img" alt="보내기 버튼"
-																								src="/images/send.png">
-																						</button>
-																					</li>
-																				</ul>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>							
-									<div class="profile-story-writing"><span th:text="${story.content}"></span> </div>
-								</div>
+								<th:block class="profile-story-card" th:each="story, status: ${storys}">	
+									<div class="profile-story-writing"><span></span> </div>
+								</th:block>
 							</div>
 						</div>
-					</form>
 					</div>
 					
 
@@ -179,6 +106,7 @@
 			</div>
 		</div>
 	</div>
+</form>
 
 </body>
 </html>
